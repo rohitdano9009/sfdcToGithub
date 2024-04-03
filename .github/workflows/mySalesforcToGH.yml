@@ -1,5 +1,16 @@
 name: Validation Deployment Check
-
 on:
   schedule:
-    - cron: '0 05 * * * ?'  # Run every 5 minutes
+    - cron: '0 0 * * * ?' 
+    - cron: '0 5 * * * ?' 
+    - cron: '0 10 * * * ?'
+    - cron: '0 15 * * * ?' 
+    - cron: '0 20 * * * ?' 
+    - cron: '0 25 * * * ?' 
+    - cron: '0 30 * * * ?' 
+    - cron: '0 35 * * * ?' 
+    - cron: '0 40 * * * ?' 
+    - cron: '0 45 * * * ?' 
+    - cron: '0 50 * * * ?' 
+    - cron: '0 55 * * * ?' 
+    
