@@ -2,7 +2,7 @@ name: Validation Deployment Check
 
 on:
   schedule:
-    - cron: '*/5 * * * *' 
+    - cron: '0 05 * * * ?'
 
 jobs:
   validation_check_job:
