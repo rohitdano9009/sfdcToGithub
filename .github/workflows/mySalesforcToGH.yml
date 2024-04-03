@@ -2,37 +2,4 @@ name: Validation Deployment Check
 
 on:
   schedule:
-    - cron: '0 05 * * * ?'
-
-jobs:
-  validation_check_job:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Run validation deployment check
-        id: validation
-        run: |
-          # Add commands here to check the validation deployment status
-          # For example, using a script or calling an API
-          # Replace the example command below with your actual command or script
-          deployment_status=$(./check_deployment_status.sh)
-          echo "Deployment status: $deployment_status"
-          echo "::set-output name=status::$deployment_status"
-
-      - name: Handle Deployment Status
-        if: steps.validation.outputs.status != 'Pass'
-        run: |
-          echo "Deployment failed, waiting for the next check..."
-          sleep 5m  # Wait for 5 minutes before checking again
-
-      - name: Execute Command on Pass
-        if: steps.validation.outputs.status == 'Pass'
-        run: |
-          echo "Deployment passed! Executing the command..."
-          # Replace the command below with your actual command to execute
-          # For example, executing a Salesforce command using Apex
-          # System.schedule('Integration Services Retry Schedule Job', '0 0 * ?', new...)
-          echo "Executing the command..."
+    - cron: '0 05 * * * ?'  # Run every 5 minutes
