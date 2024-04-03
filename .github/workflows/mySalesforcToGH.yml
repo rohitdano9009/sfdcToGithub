@@ -13,4 +13,31 @@ on:
     - cron: '0 45 * * * ?' 
     - cron: '0 50 * * * ?' 
     - cron: '0 55 * * * ?' 
+
+  jobs:
+  check_status:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check Deployment Status
+        id: check_status
+        run: |
+          # Your code to check the deployment status and store the result in a variable
+          # For example:
+          status=$(your_command_to_check_status)
+
+      - name: Process Deployment Status
+        if: ${{ steps.check_status.outputs.status == 'Pass' }}
+        run: |
+          # Execute Salesforce command using Apex
+          echo "Executing Salesforce command"
+          # Replace the below command with your Salesforce Apex command
+          echo "System.schedule('Integration Services Retry Schedule Job', '0 0 * ?', new sf_lms_IntegrationServiceRetrySchedule(20));"
+
+      - name: Wait for 5 minutes if status is fail
+        if: ${{ steps.check_status.outputs.status == 'Fail' }}
+        run: sleep 300  # Sleep for 300 seconds (5 minutes)
     
